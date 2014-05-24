@@ -1,0 +1,10 @@
+source("cachematrix.R")
+k   <- 2000
+rho <- .3
+S <- matrix(rep(rho, k*k), nrow=k)
+diag(S) <- 1
+dat <- mvrnorm(10000, mu=rep(0,k), Sigma=S)
+R <- cor(dat)
+a <- makeCacheMatrix(R)
+system.time(resultado <- cacheSolve(a))
+system.time(resultado <- cacheSolve(a))
